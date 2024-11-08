@@ -1,3 +1,3 @@
-final baseUrl = 'https://api.themoviedb.org/3/';
+final baseUrl = 'https://rickandmortyapi.com/api/';
 const charactersScreen = '/';
 const characterDetailsScreen = '/details';
