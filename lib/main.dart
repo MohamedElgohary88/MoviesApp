@@ -1,36 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/app_router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(RicklantisApp(appRouter: AppRouter()));
 }
 
-class MyApp extends StatelessWidget {
+class RicklantisApp extends StatelessWidget {
 
-  const MyApp({super.key});
+  final AppRouter appRouter;
+
+  const RicklantisApp({super.key, required this.appRouter});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: appRouter.generateRoute,
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }
