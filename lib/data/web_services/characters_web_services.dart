@@ -1,6 +1,7 @@
 import 'package:movies_app/constants/strings.dart';
 import 'package:dio/dio.dart';
 
+
 class CharactersWebServices {
   late Dio dio;
 
