@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/constants/my_colors.dart';
 import '../../data/models/character.dart';
 import '../../domain/characters_cubit.dart';
-import '../widgets/character_widget.dart';
+import '../widgets/character_item.dart';
 
 class CharactersScreen extends StatefulWidget {
   const CharactersScreen({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
         itemCount: allCharacters.length,
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
-          return CharacterWidget();
+          return CharacterItem();
         }
     );
   }
