@@ -9,84 +9,76 @@ class CharactersScreen extends StatefulWidget {
   const CharactersScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: const Text('Characters Screen'),
-    );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    return _CharactersScreenState();
-  }
+  State<StatefulWidget> createState() => _CharactersScreenState();
 }
 
 class _CharactersScreenState extends State<CharactersScreen> {
-
-  late List<Character> allCharacters;
-
   @override
   void initState() {
     super.initState();
-    allCharacters =
-        BlocProvider.of<CharactersCubit>(context).getAllCharacters();
+    BlocProvider.of<CharactersCubit>(context).getAllCharacters();
   }
 
   Widget buildBlocWidget() {
     return BlocBuilder<CharactersCubit, CharactersState>(
-        builder: (context, state) {
-          if (state is CharactersLoaded) {
-            allCharacters = state.characters;
-            return BuildLoadedListWidget();
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      builder: (context, state) {
+        if (state is CharactersLoaded) {
+          return BuildLoadedListWidget(state.characters);
+        } else if (state is CharactersError) {
+          return const Center(
+            child: Text('Failed to load characters.'),
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
+      },
     );
   }
 
-  Widget BuildLoadedListWidget() {
+  Widget BuildLoadedListWidget(List<Character> characters) {
     return SingleChildScrollView(
-        child: Container(
-          color: MyColors.myGrey,
-          child: Column(
-            children: [
-              buildCharactersList(),
-            ]
-          ),
-        )
-    );
-  }
-
-  Widget buildCharactersList() {
-    return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2 / 3,
-            mainAxisSpacing: 1,
-            crossAxisSpacing: 1
+      child: Container(
+        color: MyColors.myGrey,
+        child: Column(
+          children: [
+            buildCharactersList(characters),
+          ],
         ),
-        shrinkWrap: true,
-        physics: const ClampingScrollPhysics(),
-        itemCount: allCharacters.length,
-        padding: EdgeInsets.zero,
-        itemBuilder: (context, index) {
-          return CharacterItem();
-        }
+      ),
     );
   }
 
+  Widget buildCharactersList(List<Character> characters) {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 2 / 3,
+        mainAxisSpacing: 1,
+        crossAxisSpacing: 1,
+      ),
+      shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
+      itemCount: characters.length,
+      padding: EdgeInsets.zero,
+      itemBuilder: (context, index) {
+        return CharacterItem(character: characters[index]);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: const Text(
-        'Characters',
-        style: TextStyle(color: MyColors.myGrey),
-    ),backgroundColor:MyColors.myYellow,),body:buildBlocWidget()
+          'Characters',
+          style: TextStyle(color: MyColors.myGrey),
+        ),
+        backgroundColor: MyColors.myYellow,
+      ),
+      body: buildBlocWidget(),
     );
   }
 }

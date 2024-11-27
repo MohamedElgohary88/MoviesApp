@@ -18,13 +18,13 @@ class CharactersWebServices {
   Future<List<dynamic>> getAllCharacters() async {
     try {
       Response response = await dio.get('/character');
-      print(response.data);
-      return response.data;
+      return response.data['results']; // Access the correct key
     } catch (e) {
       print(e);
-      throw Exception('Failed to load all characters');
+      throw Exception('Failed to load characters');
     }
   }
+
 
   Future<dynamic> getCharacterById(int id) async {
     try {
