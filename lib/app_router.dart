@@ -4,6 +4,7 @@ import 'package:movies_app/presentation/screens/character_details.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/presentation/screens/characters_screen.dart';
 import 'constants/strings.dart';
+import 'data/models/character.dart';
 import 'data/repository/characters_repository.dart';
 import 'domain/characters_cubit.dart';
 
@@ -26,8 +27,9 @@ class AppRouter {
                 ));
 
       case characterDetailsScreen:
+        final characterId = settings.arguments as int;
         return MaterialPageRoute(
-            builder: (_) => const CharacterDetailsScreen());
+            builder: (_) => CharacterDetailsScreen(characterId: characterId));
     }
   }
 }
