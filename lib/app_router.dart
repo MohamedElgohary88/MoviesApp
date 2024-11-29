@@ -6,7 +6,7 @@ import 'package:movies_app/presentation/screens/characters_screen.dart';
 import 'constants/strings.dart';
 import 'data/models/character.dart';
 import 'data/repository/characters_repository.dart';
-import 'domain/characters_cubit.dart';
+import 'domain/characters/characters_cubit.dart';
 
 class AppRouter {
   late CharactersRepository charactersRepository;

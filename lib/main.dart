@@ -3,7 +3,7 @@ import 'package:movies_app/app_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/repository/characters_repository.dart';
 import 'data/web_services/characters_web_services.dart';
-import 'domain/characters_cubit.dart';
+import 'domain/characters/characters_cubit.dart';
 
 void main() {
   runApp(

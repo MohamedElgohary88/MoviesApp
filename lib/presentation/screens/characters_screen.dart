@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/constants/my_colors.dart';
 import '../../data/models/character.dart';
-import '../../domain/characters_cubit.dart';
+import '../../domain/characters/characters_cubit.dart';
 import '../widgets/character_item.dart';
 
 class CharactersScreen extends StatefulWidget {

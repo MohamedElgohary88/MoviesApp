@@ -11,8 +11,3 @@ final class CharactersLoaded extends CharactersState {
 }
 
 final class CharactersError extends CharactersState {}
-
-final class CharacterDetailsLoaded extends CharactersState {
-  final Character character;
-  CharacterDetailsLoaded(this.character);
-}
